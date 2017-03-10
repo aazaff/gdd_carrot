@@ -10,8 +10,8 @@
 #'
 #' @details This function allows you to download article metadata from the GeoDeepDive library. It allows you
 #' to choose article metadata based on one more parameters including the journal title, GeoDeepDive assigned
-#' document id, author first name, author last name, or term within the article. This data is pulled from the 
-#' \href{https://geodeepdive.org/api/articles}{GeoDeepDive /articles} route
+#' document id, author first name, author last name, or term within the article. This data is pulled from the
+#' \href{https://geodeepdive.org/api/articles}{GeoDeepDive /articles} API route
 #'
 #' Note: There are other API parameter options that are not included in this simplified wrapper.
 #'

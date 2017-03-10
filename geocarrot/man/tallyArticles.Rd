@@ -17,7 +17,7 @@ Summarizes the number of articles per journal for a publisher in the GeoDeepDive
 }
 \details{
 This function allows you to determine the number of documents for each journal associated with a
-publisher. This data is pulled from the \href{https://geodeepdive.org/api/journals}{GeoDeepDive /journals} route.
+publisher. This data is pulled from the \href{https://geodeepdive.org/api/journals}{GeoDeepDive /journals} API route.
 }
 \examples{
 # Determine the number of articles for each journal within the Elsevier publishing company
