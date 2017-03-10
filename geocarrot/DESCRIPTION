@@ -1,0 +1,14 @@
+Package: geocarrot
+Type: Package
+Title: R Interface for GeoDeepDive Library
+Version: 1.0
+Author: Andrew Zaffos and Erika Ito
+Maintainer: Erika Ito <erika.ito@outlook.com>
+Description: R interface for GeoDeepDive library of machine-readable
+    documents. Functions for accessing the GeoDeepDive API and building text mining
+    applications.
+License: GPL-3
+Encoding: UTF-8
+Depends: RJSONIO
+LazyData: true
+RoxygenNote: 5.0.1
