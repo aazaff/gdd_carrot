@@ -22,6 +22,10 @@
 #' @rdname plotNGRAM
 #' @export
 # Plots ngram
-plotNGRAM<-function(Term, Publisher, Journal){
-
-}
+plotNGRAM<-function(Term, Publisher="", Journal=""){
+    Journal<-gsub(" ", "%20", Journal)
+    Term<-gsub(" ", "%20", Term)
+    Publisher<-gsub(" ","%20",Publisher)
+    URL<-paste0("https://geodeepdive.org/api/articles?pubname=",Journal,"&term=",Term,"&publisher=",Publisher)
+    JSON<-RJSONIO::fromJSON(URL)
+    }
