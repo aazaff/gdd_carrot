@@ -24,6 +24,12 @@
 #' @rdname plotNGRAM
 #' @export
 # Plots ngram
-plotNGRAM<-function(Term, Publisher, Journal){
-
-}
+trueCommas<-function(Words) {
+        InsideQuotes<-regmatches(Words, gregexpr('"[^"]*"',Words))[[1]]
+        if (length(InsideQuotes)<1) {return(Words)}
+        Replacements<-gsub(",","",InsideQuotes)
+        for (i in 1:length(InsideQuotes)) {
+                Words<-noquote(gsub(InsideQuotes[i],Replacements[i],Words))
+                }
+        return(Words)
+        }
