@@ -1,18 +1,13 @@
 
-#' Plot Article Age Data
+#' Find clusters of consecutive proper nouns
 #'
-#' Plots the age distribution of articles using certain terms of interest (i.e. ngram).
+#' Returns tuples of GeoDeepDive docid, sentid, and sets of consecutive proper nouns.
 #'
-#' @param Term a character string
-#' @param Publisher a character vector
-#' @param Journal a character vector
+#' @param Sentence a GeoDeepDive output nlp output record
 #'
-#' @details This function plots the age distribution of articles from the GeoDeepDive digital library that contain a certain term of interest. This
-#' data comes from the \href{https://geodeepdive.org/api/articles}{GeoDeepDive /articles} API route.
+#' @details This function will find groupings of proper nouns within a sentence using the poses output of the StanfordCoreNLP. The format is a matrix of tuples of GeoDeepDive docid, sentid, and the proper nouns. This function is designed to help find the names of organizations, people, and places.
 #'
 #' @return A time series plot
-#'
-#' @import RJSONIO
 #'
 #' @author Andrew A. Zaffos & Erika T. Ito
 #'
@@ -20,19 +15,18 @@
 #'
 #' # TBDDDDD
 #'
-#' @rdname plotNGRAM
+#' @rdname findCluster
 #' @export
-# Plots ngram
 # A function to find proper noun clusters
-findCluster<-function(Sentence,Parameters=c("words","poses")) {
-        ParsedSentence<-parseSentence(Sentence,Parameters)
+findCluster<-function(Sentence) {
+        ParsedSentence<-parseSentence(Sentence,c("words","poses"))
         FindConsecutive<-findConsecutive(which(ParsedSentence["poses",]=="NNP"))
         Proper<-sapply(FindConsecutive,function(x) paste(unname(ParsedSentence["words",x]),collapse=" "))
         Proper<-unname(cbind(Sentence["docid"],Sentence["sentid"],Proper))
         return(Proper)
         }
 
-# Sees if numbers are consecutive
+# Sees if numbers are consecutive, this is a dependency of findCluster
 findConsecutive<-function(NumericSequence) {
         Breaks<-c(0,which(diff(NumericSequence)!=1),length(NumericSequence))
         ConsecutiveList<-lapply(seq(length(Breaks)-1),function(x) NumericSequence[(Breaks[x]+1):Breaks[x+1]])
