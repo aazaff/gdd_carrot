@@ -1,7 +1,7 @@
 
 #' Clean or replace punctuation oddities
 #'
-#' @description A function to help R better parse comma separated arrays taken from PostgreSQL. This includes cleaning of brackets, spaces, commas, and parenthesis. 
+#' A function to help R better parse comma separated arrays taken from PostgreSQL. This includes cleaning of brackets, spaces, commas, and parenthesis. 
 #'
 #' @param A string or vector of strings
 #'
