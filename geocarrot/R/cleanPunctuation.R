@@ -22,7 +22,15 @@
 #'
 #' @rdname plotNGRAM
 #' @export
-# Plots ngram
-plotNGRAM<-function(Term, Publisher, Journal){
-
-}
+# Remove or replace problematic punctuation
+# Even though this is redundnat with trueCommas it applies to more fields
+cleanPunctuation<-function(Sentence) {
+        Sentence<-gsub("\"\"","SPACESUB",Sentence)
+        Sentence<-gsub("\",\"","COMMASUB",Sentence) 
+        Sentence<-gsub("\\{|\\}","",Sentence)
+        Sentence<-gsub("-LRB-","(",Sentence)
+        Sentence<-gsub("-RRB-",")",Sentence)
+        Sentence<-gsub("-LCB-","{",Sentence)
+        Sentence<-gsub("-RCB-","}",Sentence)
+        return(Sentence)
+        }
