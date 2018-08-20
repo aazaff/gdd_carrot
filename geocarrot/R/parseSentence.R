@@ -2,11 +2,10 @@
 #'
 #' This function will convert a sentence from the raw GeoDeepDive nlp output tables into a more human-readable format.
 #'
-#' @param Sentence a record (row) 
-#' @param Publisher a character vector
-#' @param Journal a character vector
+#' @param Sentence a record (row) in the GDD NLP output
+#' @param Parameters a vector of sentence properties
 #'
-#' @details This function will convert a sentence from the raw GeoDeepDive nlp output tables into a more human-readable format. It returns a matrix of 
+#' @details This function will convert a sentence from the raw GeoDeepDive nlp output tables into a more human-readable format. It returns a matrix of where each column represents an individual word in the sentence, and each row represents a specific property of the word - e.g., poses, dep_parents, dep_paths. 
 #'
 #' @return A matrix 
 #'
