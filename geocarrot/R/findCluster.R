@@ -7,7 +7,7 @@
 #'
 #' @details This function will find groupings of proper nouns within a sentence using the poses output of the StanfordCoreNLP. The format is a matrix of tuples of GeoDeepDive docid, sentid, and the proper nouns. This function is designed to help find the names of organizations, people, and places.
 #'
-#' @return A time series plot
+#' @return A character matrix
 #'
 #' @author Andrew A. Zaffos & Erika T. Ito
 #'
