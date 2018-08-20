@@ -39,9 +39,9 @@ adjacencyPath<-function(Sentence,Path="amod") {
 
 # Parse the NLP strings into a matrix format
 parseSentence<-function(Sentence,Parameters=c("words","dep_paths","dep_parents")) {
-        Sentence<-setNames(gsub("\"\"","SPACESUB",Sentence),names(Sentence))
-        Sentence<-setNames(gsub("\",\"","COMMASUB",Sentence),names(Sentence))
-        WordsMatrix<-sapply(Sentence[Parameters],function(x) strsplit(substring(x,2,nchar(x)-1),","))
+        Sentence<-setNames(cleanPunctuation(Sentence),names(Sentence))
+        if ("words"%in%names(Sentence)) {Sentence["words"]<-trueCommas(Sentence["words"])}
+        WordsMatrix<-sapply(Sentence[Parameters],function(x) strsplit(x,","))
         WordsMatrix<-do.call(rbind,WordsMatrix)
         WordsMatrix[which(WordsMatrix=="COMMASUB")]<-","
         WordsMatrix[which(WordsMatrix=="SPACESUB")]<-""
