@@ -21,6 +21,7 @@
 # In principle this should work with other path types, not just amod, but I have not tested it.
 adjacencyPath<-function(Sentence,Path="amod") {
         ParsedSentence<-parseSentence(Sentence,c("words","dep_paths")
+        if (is.na(ParsedSentence)) {return(setNames(rep(NA,4),c("docid","sentid","child","parent")))}
         PathMods<-as.matrix(ParsedSentence[,which(ParsedSentence["dep_paths",]==Path)])
         if (length(PathMods)<1) {return(setNames(rep(NA,4),c("docid","sentid","child","parent")))}
         FinalList<-vector("list")
