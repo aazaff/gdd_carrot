@@ -1,26 +1,25 @@
 
-#' Plot Article Age Data
+#' Clean or replace punctuation oddities
 #'
-#' Plots the age distribution of articles using certain terms of interest (i.e. ngram).
+#' A function to help R better parse comma separated arrays taken from PostgreSQL. This includes cleaning of brackets, spaces, commas, and parenthesis. 
 #'
-#' @param Term a character string
-#' @param Publisher a character vector
-#' @param Journal a character vector
+#' @param A string or vector of strings
 #'
-#' @details This function plots the age distribution of articles from the GeoDeepDive digital library that contain a certain term of interest. This
-#' data comes from the \href{https://geodeepdive.org/api/articles}{GeoDeepDive /articles} API route.
+#' @details The punctuation changes made here are not related to GeoDeepDive or its NLP output, rather it is solving artefacts of how R handles concatenated arrays in PostgreSQL. For example, PostgreSQL brackets its arrayws with { }, which R keeps when reading the array in, which is undesirable.
 #'
-#' @return A time series plot
-#'
-#' @import RJSONIO
+#' @return A string or vector of strings
 #'
 #' @author Andrew A. Zaffos & Erika T. Ito
 #'
 #' @examples
 #'
-#' # TBDDDDD
+#' # Take a GeoDeepDive stanfordCoreNLP sentence output
+#' Sentence<-
 #'
-#' @rdname plotNGRAM
+#' # Clean a sentence
+#' Sentence<-cleanPunctuation(Sentence) 
+#'
+#' @rdname cleanPunctuation
 #' @export
 # Remove or replace problematic punctuation
 # Even though this is redundnat with trueCommas it applies to more fields
