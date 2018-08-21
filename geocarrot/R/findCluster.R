@@ -18,15 +18,17 @@
 #' @rdname findCluster
 #' @export
 # A function to find proper noun clusters
-findCluster<-function(Sentence) {
-        ParsedSentence<-parseSentence(Sentence,c("words","poses"))
+findCluster<-function(Sentence,Parameters=c("words","poses")) {
+        ParsedSentence<-parseSentence(Sentence,Parameters)
+        if(all(is.na(ParsedSentence))) {return(setNames(rep(NA,3), c("docid", "sentid", "Proper")))}
         FindConsecutive<-findConsecutive(which(ParsedSentence["poses",]=="NNP"))
         Proper<-sapply(FindConsecutive,function(x) paste(unname(ParsedSentence["words",x]),collapse=" "))
         Proper<-unname(cbind(Sentence["docid"],Sentence["sentid"],Proper))
+        colnames(Proper)<-c("docid","sentid","Proper") 
         return(Proper)
         }
 
-# Sees if numbers are consecutive, this is a dependency of findCluster
+# Sees if numbers are consecutive
 findConsecutive<-function(NumericSequence) {
         Breaks<-c(0,which(diff(NumericSequence)!=1),length(NumericSequence))
         ConsecutiveList<-lapply(seq(length(Breaks)-1),function(x) NumericSequence[(Breaks[x]+1):Breaks[x+1]])
