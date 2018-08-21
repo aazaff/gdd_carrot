@@ -23,6 +23,7 @@ parseSentence<-function(Sentence,Parameters=c("words","dep_paths","dep_parents")
         Sentence<-setNames(cleanPunctuation(Sentence),names(Sentence))
         if ("words"%in%names(Sentence)) {Sentence["words"]<-trueCommas(Sentence["words"])}
         WordsMatrix<-sapply(Sentence[Parameters],function(x) strsplit(x,","))
+        if (sum(diff(sapply(WordsMatrix,length)))!=0) {return(NA)}f
         WordsMatrix<-do.call(rbind,WordsMatrix)
         WordsMatrix[which(WordsMatrix=="COMMASUB")]<-","
         WordsMatrix[which(WordsMatrix=="SPACESUB")]<-""
