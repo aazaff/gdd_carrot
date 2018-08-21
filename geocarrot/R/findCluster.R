@@ -20,7 +20,7 @@
 # A function to find proper noun clusters
 findCluster<-function(Sentence,Parameters=c("words","poses")) {
         ParsedSentence<-parseSentence(Sentence,Parameters)
-        if(all(is.na(ParsedSentence))) {return(setNames(rep(NA,3), c("docid", "sentid", "Proper")))}
+        if(all(is.na(ParsedSentence))) {return(setNames(c(Sentence["docid"], Sentence["sentid"],"parsing error"), c("docid", "sentid", "Proper")))}
         FindConsecutive<-findConsecutive(which(ParsedSentence["poses",]=="NNP"))
         Proper<-sapply(FindConsecutive,function(x) paste(unname(ParsedSentence["words",x]),collapse=" "))
         Proper<-unname(cbind(Sentence["docid"],Sentence["sentid"],Proper))
