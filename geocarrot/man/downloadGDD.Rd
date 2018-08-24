@@ -43,4 +43,3 @@ GDDMetadata<-downloadGDD(Journal="Journal of Vertebrate Paleontology", Surname="
 \author{
 Andrew A. Zaffos & Erika T. Ito
 }
-

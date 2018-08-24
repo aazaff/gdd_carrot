@@ -21,10 +21,8 @@ publisher. This data is pulled from the \href{https://geodeepdive.org/api/journa
 }
 \examples{
 # Determine the number of articles for each journal within the Elsevier publishing company
-Elsevier<-summarizePublisher("Elsevier")
 
 }
 \author{
 Andrew A. Zaffos & Erika T. Ito
 }
-

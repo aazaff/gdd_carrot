@@ -15,7 +15,6 @@
 #'
 #' @examples
 #' # Determine the number of articles for each journal within the Elsevier publishing company
-#' Elsevier<-summarizePublisher("Elsevier")
 #'
 #' @rdname tallyArticles
 #' @export
