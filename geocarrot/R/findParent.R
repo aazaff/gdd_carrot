@@ -1,6 +1,6 @@
-#' Find adjectives and the nouns they describe
+#' Find children and parents
 #'
-#' Returns a tuple of adjectives and nouns in a target sentence.
+#' Returns a tuple of a child and a parent defined by the StanfordCoreNLP.
 #'
 #' @param Sentence a record (row) in the GeoDeepDive NLP output
 #' @param Path a stanford core nlp pose code
@@ -19,7 +19,7 @@
 #' @export
 # A function to parse a sentence and extract any grammatically linked termspaired terms
 # In principle this should work with other path types, not just amod, but I have not tested it.
-adjacencyPath<-function(Sentence,Path="amod") {
+findParent<-function(Sentence,Path="amod") {
         ParsedSentence<-parseSentence(Sentence,c("words","dep_paths","dep_parents"))
         if (all(is.na(ParsedSentence))) {return(setNames(c(Sentence["docid"], Sentence["sentid"],rep("parsing error",2)),c("docid","sentid","child","parent")))}
         PathMods<-as.matrix(ParsedSentence[,which(ParsedSentence["dep_paths",]==Path)])
