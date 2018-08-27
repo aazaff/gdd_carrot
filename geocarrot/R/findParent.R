@@ -5,7 +5,7 @@
 #' @param Sentence a record (row) in the GeoDeepDive NLP output
 #' @param Path a stanford core nlp pose code
 #'
-#' @details 
+#' @details
 #'
 #' @return A character matrix
 #'
@@ -21,9 +21,9 @@
 # In principle this should work with other path types, not just amod, but I have not tested it.
 findParent<-function(Sentence,Path="amod") {
         ParsedSentence<-parseSentence(Sentence,c("words","dep_paths","dep_parents"))
-        if (all(is.na(ParsedSentence))) {return(setNames(c(Sentence["docid"], Sentence["sentid"],rep("parsing error",2)),c("docid","sentid","child","parent")))}
+        if (all(is.na(ParsedSentence))) {return(stats::setNames(c(Sentence["docid"], Sentence["sentid"],rep("parsing error",2)),c("docid","sentid","child","parent")))}
         PathMods<-as.matrix(ParsedSentence[,which(ParsedSentence["dep_paths",]==Path)])
-        if (length(PathMods)<1) {return(setNames(rep(NA,4),c("docid","sentid","child","parent")))}
+        if (length(PathMods)<1) {return(stats::setNames(rep(NA,4),c("docid","sentid","child","parent")))}
         FinalList<-vector("list")
         for (j in seq_len(ncol(PathMods))) {
                 FinalList[[length(FinalList)+1]]<-c(Sentence[1:2],PathMods["words",j],ParsedSentence["words",as.numeric(PathMods["dep_parents",j])])

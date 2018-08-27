@@ -33,11 +33,14 @@ document id, author first name, author last name, or term within the article. Th
 Note: There are other API parameter options that are not included in this simplified wrapper.
 }
 \examples{
-# Download the metadata for all articles from the Journal of Vertebrate Paleontology
+# Download metadata for articles from Journal of Vertebrate Paleontology
 GDDMetadata<-downloadGDD(Journal="Journal of Vertebrate Paleontology")
 
-# Download the metadata for all articles from the Journal of Vertebrate Paleontology written by Michael J. Benton
-GDDMetadata<-downloadGDD(Journal="Journal of Vertebrate Paleontology", Surname="Benton", Given="Michael")
+# Download  metadata from Journal of Vertebrate Paleontology by Michael J. Benton
+Surname<-"Benton"
+Given<-"Michael"
+Journal<-"Journal of Vertebrate Paleontology"
+GDDMetadata<-downloadGDD(Journal,Surname,Given)
 
 }
 \author{

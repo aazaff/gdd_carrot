@@ -1,4 +1,3 @@
-
 #' Find clusters of consecutive posees
 #'
 #' Returns tuples of GeoDeepDive docid, sentid, and sets of consecutive parts of speech (i.e., poses).
@@ -14,19 +13,28 @@
 #'
 #' @examples
 #'
-#' # TBDDDDD
+#' # Unlock the example dataset
+#' nlp_output<-data(usgs_gdd)
+#'
+#' # Extract all clusters of proper nouns across all documents
+#' ProperNouns<-apply(usgs_gdd,1,consecutivePoses,"NNP")
+#' # Collapse back into a character matrix
+#' ProperMatrix<-do.call(rbind,ProperNouns)
+#'
+#' # Extract all adjectives in a single sentence
+#' Adjectives<-consecutivePoses(usgs_gdd[350,],"JJ")
 #'
 #' @rdname consecutivePoses
 #' @export
 # A function to find proper noun clusters
 consecutivePoses<-function(Sentence,Pose="NNP") {
         ParsedSentence<-parseSentence(Sentence,c("words","poses"))
-        if(all(is.na(ParsedSentence))) {return(setNames(c(Sentence["docid"], Sentence["sentid"],"parsing error"), c("docid", "sentid", "Proper")))}
+        if(all(is.na(ParsedSentence))) {return(stats::setNames(c(Sentence["docid"], Sentence["sentid"],"parsing error"), c("docid", "sentid", "Proper")))}
         FindConsecutive<-findConsecutive(which(ParsedSentence["poses",]==Pose))
-        Proper<-sapply(FindConsecutive,function(x) paste(unname(ParsedSentence["words",x]),collapse=" "))
-        Proper<-unname(cbind(Sentence["docid"],Sentence["sentid"],Proper))
-        colnames(Proper)<-c("docid","sentid","Proper")
-        return(Proper)
+        Poses<-sapply(FindConsecutive,function(x) paste(unname(ParsedSentence["words",x]),collapse=" "))
+        Poses<-cbind(Sentence["docid"],Sentence["sentid"],Poses,row.names=NULL)
+        colnames(Poses)<-c("docid","sentid",Pose)
+        return(Poses)
         }
 
 # Sees if numbers are consecutive

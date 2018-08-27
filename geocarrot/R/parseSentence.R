@@ -5,9 +5,9 @@
 #' @param Sentence a record (row) in the GDD NLP output
 #' @param Parameters a vector of sentence properties
 #'
-#' @details This function will convert a sentence from the raw GeoDeepDive nlp output tables into a more human-readable format. It returns a matrix of where each column represents an individual word in the sentence, and each row represents a specific property of the word - e.g., poses, dep_parents, dep_paths. 
+#' @details This function will convert a sentence from the raw GeoDeepDive nlp output tables into a more human-readable format. It returns a matrix of where each column represents an individual word in the sentence, and each row represents a specific property of the word - e.g., poses, dep_parents, dep_paths.
 #'
-#' @return A matrix 
+#' @return A matrix
 #'
 #' @author Andrew A. Zaffos & Erika T. Ito
 #'
@@ -20,7 +20,7 @@
 # Plots ngram
 # Parse the NLP strings into a matrix format
 parseSentence<-function(Sentence,Parameters=c("words","dep_paths","dep_parents")) {
-        Sentence<-setNames(cleanPunctuation(Sentence),names(Sentence))
+        Sentence<-stats::setNames(cleanPunctuation(Sentence),names(Sentence))
         if ("words"%in%names(Sentence)) {Sentence["words"]<-trueCommas(Sentence["words"])}
         WordsMatrix<-sapply(Sentence[Parameters],function(x) strsplit(x,","))
         if (sum(diff(sapply(WordsMatrix,length)))!=0) {return(NA)}
@@ -30,8 +30,8 @@ parseSentence<-function(Sentence,Parameters=c("words","dep_paths","dep_parents")
         colnames(WordsMatrix)<-1:ncol(WordsMatrix)
         return(WordsMatrix)
         }
-                            
-# R confuses 2,000,381 in a PostgreSQL array as 2 000 381, this function will convert those cases to 2000381.  
+
+# R confuses 2,000,381 in a PostgreSQL array as 2 000 381, this function will convert those cases to 2000381.
 trueCommas<-function(Words) {
         InsideQuotes<-regmatches(Words, gregexpr('"[^"]*"',Words))[[1]]
         if (length(InsideQuotes)<1) {return(Words)}

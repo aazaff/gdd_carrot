@@ -22,7 +22,16 @@ This function will find groupings of parts of speech that occur consecutively wi
 }
 \examples{
 
-# TBDDDDD
+# Unlock the example dataset
+nlp_output<-data(usgs_gdd)
+
+# Extract all clusters of proper nouns across all documents
+ProperNouns<-apply(usgs_gdd,1,consecutivePoses,"NNP")
+# Collapse back into a character matrix
+ProperMatrix<-do.call(rbind,ProperNouns)
+
+# Extract all adjectives in a single sentence
+Adjectives<-consecutivePoses(usgs_gdd[350,],"JJ")
 
 }
 \author{
